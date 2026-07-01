@@ -1,157 +1,149 @@
 # Hospital Resource Allocation using Linear Programming
 
-An Operations Research project that models the optimal allocation of limited hospital resources using **Mixed Integer Linear Programming (MILP)**.
+An academic Operations Research project that models the optimal allocation of limited hospital resources using **Mixed Integer Linear Programming (MILP)** with the **PuLP** optimization library.
 
-The objective is to maximize the overall weighted survival score of patients while respecting resource limitations such as ICU beds, ventilators, and available doctors.
+The objective is to maximize the overall weighted survival score of patients while satisfying constraints on ICU beds, ventilators, and available medical staff.
 
 ---
 
 ## Overview
 
-Hospitals often face situations where critical resources are limited. This project demonstrates how mathematical optimization can assist in allocating these scarce resources fairly and efficiently.
+Efficient allocation of scarce healthcare resources is a critical challenge during emergencies and periods of high patient demand. This project formulates the problem as a Mixed Integer Linear Programming (MILP) model to determine the optimal distribution of ICU beds and ventilators among patients.
 
-The optimization model determines:
-
-* Which patients should receive ICU beds
-* Which ICU patients should receive ventilators
-* Whether all hospital capacity constraints are satisfied
+The model prioritizes patients based on weighted survival scores while ensuring that all hospital resource constraints are satisfied.
 
 ---
 
-## Problem Formulation
+## Features
 
-### Objective Function
+* Optimizes ICU bed allocation
+* Allocates ventilators only to eligible ICU patients
+* Prioritizes patients using weighted survival scores
+* Enforces multiple real-world hospital constraints
+* Validates all resource constraints after optimization
+* Generates a summary of resource utilization and patient allocation
 
-Maximize the total weighted survival score:
+---
 
-[
-\max \sum_i W_i \times S_i \times x_i
-]
+## Mathematical Model
 
+## Objective
+
+The optimization model maximizes the sum of each patient's **priority weight × survival score** for all patients allocated an ICU bed.
 where:
 
-* **Sᵢ** = Survival score of patient *i*
-* **Wᵢ** = Priority weight
-* **xᵢ** = Binary variable indicating ICU allocation
+* **Sᵢ** – Survival score of patient *i*
+* **Wᵢ** – Priority weight assigned to patient *i*
+* **xᵢ** – Binary decision variable indicating ICU allocation
 
 ---
 
 ## Constraints
 
-The model satisfies the following constraints:
+The optimization model enforces:
 
-* Limited ICU bed capacity
-* Limited ventilator availability
+* ICU bed capacity
+* Ventilator availability
 * Ventilators can only be assigned to ICU patients
 * Patients requiring ventilators must receive one if admitted
 * Doctor-to-patient capacity limits
 
 ---
 
-## Technologies Used
+## Sample Dataset
 
-* Python
-* PuLP
-* Streamlit
-* Pyngrok
-
----
-
-## Dataset
-
-The project uses a sample dataset consisting of **10 patients**, each with:
+The project uses a sample dataset consisting of **10 patients**, each defined by:
 
 * Survival score
 * Priority weight
 * Ventilator requirement
 
-Hospital resources include:
+Available hospital resources:
 
-* 5 ICU beds
-* 3 Ventilators
-* 2 Doctors
-* Maximum 3 patients per doctor
+* **5 ICU beds**
+* **3 Ventilators**
+* **2 Doctors**
+* **Maximum 3 patients per doctor**
+
+---
+
+## Technologies Used
+
+* Python
+* PuLP (Linear Programming)
 
 ---
 
 ## Project Structure
 
-```text id="tjjlwm"
+```text
 Hospital-Resource-Allocation/
-│── hospital_optimizer1.py
-│── README.md
+│── optimizer.py
+│── requirements.txt
+└── README.md
 ```
 
 ---
 
 ## Installation
 
-Install the required packages:
+Clone the repository:
 
-```bash id="slj84r"
-pip install pulp streamlit pyngrok
+```bash
+git clone <repository-url>
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
 ## Running the Project
 
-Run the optimization model:
+Execute the optimization model:
 
-```bash id="b8tnni"
-python hospital_optimizer1.py
+```bash
+python optimizer.py
 ```
 
-Or launch the Streamlit interface:
-
-```bash id="7b8z1u"
-streamlit run hospital_optimizer1.py
-```
-
----
-
-## Sample Output
-
-The model provides:
+The program outputs:
 
 * Optimization status
-* ICU allocation for each patient
-* Ventilator allocation
+* Selected ICU patients
+* Selected ventilator patients
 * Total weighted survival score
 * Resource utilization
-* Constraint validation
-* Final interpretation of the allocation
+* Constraint verification
 
 ---
 
 ## Applications
 
-This optimization model can be adapted for:
+This optimization approach can be extended for:
 
 * Hospital emergency planning
-* Pandemic resource allocation
-* Disaster response management
+* Pandemic response
+* Disaster management
 * Healthcare operations research
-* Decision support systems
+* Clinical decision support systems
 
 ---
 
 ## Future Improvements
 
+* Read patient information from CSV files
+* Interactive user interface
 * Larger real-world datasets
-* Patient arrival scheduling
 * Multi-objective optimization
-* Resource cost minimization
-* Interactive dashboard with charts
-* Database integration
+* Cost-aware resource allocation
 * Sensitivity analysis
+* Data visualization of allocation results
 
 ---
 
-## Learning Outcomes
-
-This project demonstrates the application of Operations Research techniques to healthcare decision-making using Mixed Integer Linear Programming. It illustrates how optimization models can support resource allocation under multiple real-world constraints.
-
 ## Team
 
-Developed collaboratively as part of an academic Operations Research project.
+Developed collaboratively as part of an academic Operations Research project using Python and PuLP.
