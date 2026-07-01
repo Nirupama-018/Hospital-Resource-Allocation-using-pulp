@@ -1,3 +1,5 @@
+import pulp
+
 def optimize():
     patients = ['P1','P2','P3','P4','P5','P6','P7','P8','P9','P10']
     #survival scores (Si)
@@ -37,6 +39,21 @@ def optimize():
     model += pulp.lpSum(x[i] for i in patients) <= D * k, "Doctor_Capacity"
     
     model.solve()
+
+    icu_patients = []
+    vent_patients = []
+    
+    for i in patients:
+        if int(pulp.value(x[i])) == 1:
+            icu_patients.append(i)
+        if int(pulp.value(y[i])) == 1:
+            vent_patients.append(i)
+    
+    total_score = sum(
+        W[i] * S[i] * pulp.value(x[i])
+        for i in patients
+    )
+    
     return {
         "status": pulp.LpStatus[model.status],
         "icu_patients": icu_patients,
